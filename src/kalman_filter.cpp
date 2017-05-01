@@ -36,11 +36,11 @@ void KalmanFilter::Predict() {
 static inline MatrixXd Inverse(const MatrixXd & S) {
 
 #if defined(CHOLESKY_DECOMP_INVERSE)
-  /* Assuming that S is symetric positive definite, we can apply the 
+  /* Assuming that S is symetric positive semi-definite, we can apply the 
   Cholesky decomposition as a more efficient way of calculating the inverse.
   In Eigen, this is done with Si = S.llt().solve(I). 
   It might fail if numerical errors cause the S matrix to
-  lose its positive definite properties. */
+  lose its positive semi-definite properties. */
   return S.llt().solve(MatrixXd::Identity(S.rows(), S.cols()));
 
 #else
